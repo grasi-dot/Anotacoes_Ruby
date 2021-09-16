@@ -1,76 +1,128 @@
-#colecoes de dados mais avancadas
-#criando 
+#metodos permitem  nomear seções do código e, em seguida, executá-lo em qualquer lugar do programa quantas vezes forem necessárias, apenas chamando esse nome.
 
-my_hash = { 
-    "a random word" => "ahoy", 
-    "Dorothy's math test score" => 94, 
-    "an array" => [1, 2, 3],
-    "an empty hash within a hash" => {} 
-}
+#METODOS INTEGRADOS DE RUBY
 
-#foguete de hash : =>
+"anything".reverse
 
-my_hash = Hash.new
-my_hash               #=> {}
+#CRIANDO UM METODO 
+def my_name 
+  "Joe_smith"
+end
 
-hash = { 9 => "nine", :six => 6 }
+puts my_name
 
-#valores de acesso
+#NOMES DE METODOS 
 
-shoes = {
-    "summer" => "sandals",
-    "winter" => "boots"
-}
-  
-shoes["summer"]   #=> "sandals"
-shoes["hiking"]   #=> nil
-shoes.fetch("hiking", "hiking boots") #=> "hiking boots"
+method_name      # valid
+_name_of_method  # valid
+1_method_name    # invalid
+method_27        # valid
+method?_name     # invalid
+method_name!     # valid
+begin            # invalid (Ruby reserved word)
+begin_count      # valid
 
-#adicionar  e alterar dados
+#PARAMENTROS E ARGUMENTOS
+
+def greet(name)
+  "Hello, " + name + "!"
+end
+
+puts greet("John") #=> Hello, John!
+
+#Neste exemplo, nameé um parâmetro que o greetmétodo usa para retornar uma saudação mais específica.Neste exemplo, nameé um parâmetro que o greetmétodo usa para retornar uma saudação mais específica.
+
+#parametros padrao
+
+def greet(name = "stranger")
+  "Hello, " + name + "!"
+end
+
+puts greet("Jane") #=> Hello, Jane!
+puts greet #=> Hello, stranger!
+
+#retorno
+def my_name
+  return "Joe Smith"
+end
+
+puts my_name #=> "Joe Smith"
+
+def even_odd(number)
+  if number % 2 == 0
+    "That is an even number."
+  else
+    "That is an odd number."
+  end
+end
+
+puts even_odd(16) #=>  That is an even number.
+puts even_odd(17) #=>  That is an odd number.
+
+def my_name
+  return "Joe Smith"
+  "Jane Doe"
+end
+
+puts my_name #=> "Joe Smith"
+
+def even_odd(number)
+  unless number.is_a? Numeric
+    return "A number was not entered."
+  end
+
+  if number % 2 == 0
+    "That is an even number."
+  else
+    "That is an odd number."
+  end
+end
+
+puts even_odd(20) #=>  That is an even number.
+puts even_odd("Ruby") #=>  A number was not entered.
 
 
-shoes["fall"] = "sneakers"
+def puts_squared(number)
+  puts number * number
+end
 
-shoes     #=> {"summer"=>"sandals", "winter"=>"boots", "fall"=>"sneakers"}
+def return_squared(number)
+  number * number
+end
 
-shoes["summer"] = "flip-flops"
-shoes     #=> {"summer"=>"flip-flops", "winter"=>"boots", "fall"=>"sneakers"}
+x = return_squared(20) #=> 400
+y = 100
+sum = x + y #=> 500
 
-#REMOVER
+puts "The sum of #{x} and #{y} is #{sum}."
+#=> The sum of 400 and 100 is 500.
 
-shoes.delete("summer")    #=> "flip-flops"
-shoes                     #=> {"winter"=>"boots", "fall"=>"sneakers"}
+#METODOS DE ENCADEAMENTO
 
-#metodos
+phrase = ["be", "to", "not", "or", "be", "to"]
 
-books = { 
-    "Infinite Jest" => "David Foster Wallace", 
-    "Into the Wild" => "Jon Krakauer" 
-  }
-  
-  books.keys      #=> ["Infinite Jest", "Into the Wild"]
-  books.values    #=> ["David Foster Wallace", "Jon Krakauer"]
+puts phrase.reverse.join(" ").capitalize
+#=> "To be or not to be"
 
-#MESCLAR
+["be", "to", "not", "or", "be", "to"].reverse
+= ["to", "be", "or", "not", "to", "be"].join(" ")
+= "to be or not to be".capitalize
+= "To be or not to be"
 
-hash1 = { "a" => 100, "b" => 200 }
-hash2 = { "b" => 254, "c" => 300 }
-hash1.merge(hash2)      #=> { "a" => 100, "b" => 254, "c" => 300 }
+#METODOS PREDICADOS RETORNAM TRUE OR FALSE
 
-#simbolos
+puts 5.even?  #=> false
+puts 6.even?  #=> true
+puts 17.odd?  #=> true
 
-# 'Rocket' syntax 
-american_cars = { 
-    :chevrolet => "Corvette", 
-    :ford => "Mustang", 
-    :dodge => "Ram" 
-}
-# 'Symbols' syntax
-japanese_cars = { 
-    honda: "Accord", 
-    toyota: "Corolla", 
-    nissan: "Altima" 
-}
+puts 12.between?(10, 15)  #=> true
 
-american_cars[:ford]    #=> "Mustang"
-japanese_cars[:honda]   #=> "Accord"
+#metodos bang
+
+whisper = "HELLO EVERYBODY"
+
+puts whisper.downcase #=> "hello everybody"
+puts whisper #=> "HELLO EVERYBODY"
+
+puts whisper.downcase! #=> "hello everybody"
+puts whisper #=> "hello everybody"
